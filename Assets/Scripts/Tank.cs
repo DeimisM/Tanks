@@ -28,7 +28,7 @@ public class Tank : MonoBehaviour
 
         if (Input.GetKey(shootKey))
         {
-            print("bum");
+            //print("bum");
             Instantiate(bullet, shootPoint.position, transform.rotation);
         }
     }
