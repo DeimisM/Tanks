@@ -12,6 +12,10 @@ public class Tank : MonoBehaviour
     public string vertical;
     public string horizontal;
 
+    public KeyCode shootKey;
+
+    public GameObject bullet;
+
     void Update()
     {
         var ver = Input.GetAxis(vertical);
@@ -20,9 +24,10 @@ public class Tank : MonoBehaviour
         var hor = Input.GetAxis(horizontal);
         transform.Rotate(0, rotateSpeed * hor * Time.deltaTime, 0);
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(shootKey))
         {
-
+            print("bum");
+            Instantiate(bullet, transform.position, transform.rotation);
         }
     }
 }
