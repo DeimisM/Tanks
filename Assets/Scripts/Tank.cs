@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Xml.Schema;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Tank : MonoBehaviour
 {
@@ -15,6 +16,7 @@ public class Tank : MonoBehaviour
     public KeyCode shootKey;
 
     public GameObject bullet;
+    public Transform shootPoint;
 
     void Update()
     {
@@ -24,10 +26,10 @@ public class Tank : MonoBehaviour
         var hor = Input.GetAxis(horizontal);
         transform.Rotate(0, rotateSpeed * hor * Time.deltaTime, 0);
 
-        if (Input.GetKeyDown(shootKey))
+        if (Input.GetKey(shootKey))
         {
             print("bum");
-            Instantiate(bullet, transform.position, transform.rotation);
+            Instantiate(bullet, shootPoint.position, transform.rotation);
         }
     }
 }
