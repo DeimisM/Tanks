@@ -74,6 +74,7 @@ MonoBehaviour:
   horizontal: Horizontal
   shootKey: 32
   bullet: {fileID: 1624917832873855348, guid: afee7c474f57adb438cb04a16c21e39a, type: 3}
+  shootPoint: {fileID: 0}
 --- !u!54 &941554389025912701
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -126,7 +127,7 @@ Transform:
   m_GameObject: {fileID: 9202001323853902353}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.9859, z: -0}
+  m_LocalPosition: {x: 0, y: 4.17, z: -0}
   m_LocalScale: {x: 6.666666, y: 6.6666646, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
