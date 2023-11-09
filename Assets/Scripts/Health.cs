@@ -8,9 +8,29 @@ public class Health : MonoBehaviour
     public int particleCount;
     public int hp;
 
+    AudioSource audioSource;
+    public AudioClip explosion;
+    public AudioClip hit;
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     public void Damage()
     {
+        audioSource.PlayOneShot(hit);
         hp--;
+        if (hp <= 0)
+        {
+            Die();
+        }
+    }
+
+    public void Ram()
+    {
+        audioSource.PlayOneShot(hit);
+        hp -= 30;
         if (hp <= 0)
         {
             Die();
@@ -19,12 +39,14 @@ public class Health : MonoBehaviour
 
     public void Die()
     {
-        Destroy(gameObject);
+        audioSource.clip = explosion;
+        audioSource.PlayOneShot(explosion);
 
         for (int i = 0; i < particleCount; i++)
         {
             var offset = Random.insideUnitSphere;
             Instantiate(particle, transform.position + offset, transform.rotation);
         }
+        Destroy(gameObject);
     }
 }

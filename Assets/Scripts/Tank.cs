@@ -18,6 +18,14 @@ public class Tank : MonoBehaviour
     public GameObject bullet;
     public Transform shootPoint;
 
+    AudioSource audioSource;
+    public AudioClip shooting;
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     void Update()
     {
         var ver = Input.GetAxis(vertical);
@@ -30,6 +38,29 @@ public class Tank : MonoBehaviour
         {
             //print("bum");
             Instantiate(bullet, shootPoint.position, transform.rotation);
+
+            if (!audioSource.isPlaying)
+            {
+                audioSource.clip = shooting;
+                audioSource.Play();
+            }
+        }
+
+        else
+        {
+            if (audioSource.isPlaying)
+            {
+                audioSource.Stop();
+            }
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Boom")
+        {
+            //Destroy(collision.gameObject);          // istrina ka priliete
+            collision.gameObject.GetComponent<Health>().Ram();
         }
     }
 }

@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float speed = 1000000;
+    public float speed = 20;
+    //public KeyCode shootKey;
 
     private void Start()
     {
         Destroy(gameObject, 2f);
+        //audioSource.PlayOneShot(pew);
     }
+
+
+
     void Update()
     {
         transform.position += transform.forward * speed * Time.deltaTime;
@@ -22,7 +27,6 @@ public class Bullet : MonoBehaviour
         {
             //Destroy(collision.gameObject);          // istrina ka priliete
             collision.gameObject.GetComponent<Health>().Damage();
-            print("die");
         }
     }
 }

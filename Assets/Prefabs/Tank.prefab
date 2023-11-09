@@ -42,7 +42,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 704428632414460994}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 39338ec6e4ede6b448d6d5462dd73341, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -75,6 +75,7 @@ MonoBehaviour:
   shootKey: 32
   bullet: {fileID: 1624917832873855348, guid: afee7c474f57adb438cb04a16c21e39a, type: 3}
   shootPoint: {fileID: 0}
+  shooting: {fileID: 8300000, guid: f3ad4b8ccc67f7b4caa7bb36239bcbd2, type: 3}
 --- !u!54 &941554389025912701
 Rigidbody:
   m_ObjectHideFlags: 0
