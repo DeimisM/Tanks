@@ -47,6 +47,7 @@ public class Health : MonoBehaviour
             var offset = Random.insideUnitSphere;
             Instantiate(particle, transform.position + offset, transform.rotation);
         }
+
         Destroy(gameObject);
     }
 }

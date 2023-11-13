@@ -1,12 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Xml.Schema;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class Tank : MonoBehaviour
 {
-
     public float speed = 5;
     public float rotateSpeed = 90;
 
@@ -20,10 +17,17 @@ public class Tank : MonoBehaviour
 
     AudioSource audioSource;
     public AudioClip shooting;
+    public AudioClip engine;
 
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();
+
+        // Ensure there is an AudioSource component attached
+        if (audioSource == null)
+        {
+            audioSource = gameObject.AddComponent<AudioSource>();
+        }
     }
 
     void Update()
@@ -34,21 +38,41 @@ public class Tank : MonoBehaviour
         var hor = Input.GetAxis(horizontal);
         transform.Rotate(0, rotateSpeed * hor * Time.deltaTime, 0);
 
+        // Check if the tank is moving
+        if (ver != 0 || hor != 0)
+        {
+            if (!audioSource.isPlaying)
+            {
+                // Play engine sound
+                audioSource.clip = engine;
+                audioSource.Play();
+            }
+        }
+        else
+        {
+            // Tank is not moving, stop playing engine sound
+            if (audioSource.isPlaying && audioSource.clip == engine)
+            {
+                audioSource.Stop();
+            }
+        }
+
         if (Input.GetKey(shootKey))
         {
-            //print("bum");
+            // Instantiate bullet and play shooting sound
             Instantiate(bullet, shootPoint.position, transform.rotation);
 
             if (!audioSource.isPlaying)
             {
+                // Play shooting sound
                 audioSource.clip = shooting;
                 audioSource.Play();
             }
         }
-
         else
         {
-            if (audioSource.isPlaying)
+            // Stop playing shooting sound
+            if (audioSource.isPlaying && audioSource.clip == shooting)
             {
                 audioSource.Stop();
             }
@@ -59,7 +83,6 @@ public class Tank : MonoBehaviour
     {
         if (collision.gameObject.tag == "Boom")
         {
-            //Destroy(collision.gameObject);          // istrina ka priliete
             collision.gameObject.GetComponent<Health>().Ram();
         }
     }
